@@ -1,0 +1,1 @@
+export const dimensions = { gutter: 20, gap: 12, border: 1, buttonHeight: 52 } as const;

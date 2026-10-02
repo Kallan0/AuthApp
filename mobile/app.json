@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Illoca",
+    "slug": "illoca",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "illoca",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "com.illoca",
+      "googleServicesFile": "./google-services.json"
+    },
+    "ios": {
+      "bundleIdentifier": "com.illoca"
+    },
+    "plugins": [
+      "@react-native-community/datetimepicker",
+      "@react-native-google-signin/google-signin"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "8d0a4ec7-68d0-43e0-b9a8-2e98d6e84e52"
+      }
+    }
+  }
+}
