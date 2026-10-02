@@ -9,7 +9,8 @@
     "start": "expo start --go",
     "start:tunnel": "expo start --go --tunnel",
     "start:dev-client": "expo start --dev-client",
-    "build:android:development": "npx eas-cli@latest build --platform android --profile development"
+    "build:android:development": "npx eas-cli@latest build --platform android --profile development",
+    "build:android:preview": "npx eas-cli@latest build --platform android --profile preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

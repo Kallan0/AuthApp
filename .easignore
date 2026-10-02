@@ -1,0 +1,18 @@
+# EAS archives this repository from the Git root, even when run in mobile/.
+/.git
+/backend
+/docs
+/mobile/node_modules
+/mobile/android
+/mobile/ios
+/mobile/.expo
+/mobile/.env
+/mobile/.npm-cache
+/mobile/.tmp-eas-archive
+/mobile/.tmp-expo-export
+/mobile/.bundle
+/mobile/expo-go-qr.png
+
+# The Android build needs this local Firebase configuration file.
+/mobile/google-services.json
+!/mobile/google-services.json

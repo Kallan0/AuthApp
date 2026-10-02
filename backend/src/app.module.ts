@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module.js';
 import { TasksModule } from './tasks/tasks.module.js';
 import { UsersModule } from './users/users.module.js';
 import configuration from './config/configuration.js';
+import { HealthController } from './health.controller.js';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import configuration from './config/configuration.js';
     ThrottlerModule.forRoot([{ ttl: 60_000, limit: 30 }]),
     UsersModule, AuthModule, TasksModule,
   ],
+  controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}

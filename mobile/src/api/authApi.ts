@@ -67,7 +67,8 @@ export const authApi = {
   },
   async me(): Promise<User> {
     if (PREVIEW_MODE) return previewApi.me();
-    const response = await client.get<ApiSuccess<User>>('/auth/me');
+    // A free hosted API may need about a minute to wake after being idle.
+    const response = await client.get<ApiSuccess<User>>('/auth/me', { timeout: 90_000 });
     return response.data.data;
   },
   async logout(): Promise<void> {
