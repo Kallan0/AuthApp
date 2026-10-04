@@ -1,6 +1,37 @@
 # Illoca
 
-An Expo task app with a NestJS/MongoDB API and Firebase Authentication.
+Illoca is a mobile task planner for creating, scheduling, and tracking tasks. It supports email/password and Google sign-in, deadline alerts while the app is open, and a NestJS API that stores accounts and tasks in MongoDB.
+
+## Tech stack
+
+### Languages
+
+| Language | Used for |
+| --- | --- |
+| <img src="https://cdn.simpleicons.org/typescript" width="22" height="22" alt="TypeScript icon"> **TypeScript** | Mobile app and backend |
+| <img src="https://cdn.simpleicons.org/javascript" width="22" height="22" alt="JavaScript icon"> **JavaScript** | App configuration and migration script |
+| <img src="https://cdn.simpleicons.org/kotlin" width="22" height="22" alt="Kotlin icon"> **Kotlin** | Android native project |
+| <img src="https://cdn.simpleicons.org/swift" width="22" height="22" alt="Swift icon"> **Swift** | iOS native project |
+
+### Frameworks, services, and tools
+
+| Tool | Role |
+| --- | --- |
+| <img src="https://cdn.simpleicons.org/react" width="22" height="22" alt="React icon"> **React Native** | Mobile interface |
+| <img src="https://cdn.simpleicons.org/expo/000020/FFFFFF" width="22" height="22" alt="Expo icon"> **Expo** | Development and device previews |
+| <img src="https://cdn.simpleicons.org/expo/000020/FFFFFF" width="22" height="22" alt="Expo icon"> **EAS Build** | Android development and preview APKs |
+| <img src="https://cdn.simpleicons.org/android" width="22" height="22" alt="Android icon"> **Android** | Primary testing platform |
+| <img src="https://cdn.simpleicons.org/nodedotjs" width="22" height="22" alt="Node.js icon"> **Node.js** | API runtime |
+| <img src="https://cdn.simpleicons.org/nestjs" width="22" height="22" alt="NestJS icon"> **NestJS** | REST API |
+| <img src="https://cdn.simpleicons.org/mongodb" width="22" height="22" alt="MongoDB icon"> **MongoDB** | Account and task storage |
+| <img src="https://cdn.simpleicons.org/firebase" width="22" height="22" alt="Firebase icon"> **Firebase Authentication** | Email/password and Google sign-in |
+| <img src="https://cdn.simpleicons.org/render/000000/FFFFFF" width="22" height="22" alt="Render icon"> **Render** | API hosting configuration |
+| <img src="https://cdn.simpleicons.org/git" width="22" height="22" alt="Git icon"> **Git** | Version control |
+| <img src="https://cdn.simpleicons.org/github/181717/FFFFFF" width="22" height="22" alt="GitHub icon"> **GitHub** | Source repository |
+| <img src="https://cdn.simpleicons.org/vitest" width="22" height="22" alt="Vitest icon"> **Vitest** | Backend tests |
+| <img src="https://cdn.simpleicons.org/eslint" width="22" height="22" alt="ESLint icon"> **ESLint** | Mobile code checks |
+
+Icons are served by [Simple Icons](https://simpleicons.org/). Commands below assume a terminal opened at the repository root.
 
 ## Firebase setup
 
@@ -15,7 +46,7 @@ An Expo task app with a NestJS/MongoDB API and Firebase Authentication.
 Run the dry run first. It reports conflicts without changing data. Then apply it. Existing passwords, MongoDB user IDs, and tasks are preserved.
 
 ```powershell
-cd C:\Users\Joji\Internship_works\Login_app\backend
+cd backend
 npm.cmd install
 npm.cmd run migrate:firebase
 npm.cmd run migrate:firebase -- --apply
@@ -29,7 +60,7 @@ If another Firebase UID already uses a legacy email, the script reports a confli
 Set `EXPO_PUBLIC_API_URL=http://YOUR_COMPUTER_LAN_IP:5000/api` in `mobile/.env`. Find the computer's Wi-Fi IPv4 address with `ipconfig`. Keep the phone on the same network.
 
 ```powershell
-cd C:\Users\Joji\Internship_works\Login_app\mobile
+cd mobile
 npm.cmd install
 npm.cmd start
 ```
@@ -39,7 +70,7 @@ Scan the QR in Expo Go. If Wi-Fi transport fails, stop Expo with Ctrl+C and run 
 ## Android development build: Google
 
 ```powershell
-cd C:\Users\Joji\Internship_works\Login_app\mobile
+cd mobile
 npx.cmd eas-cli@latest login
 npm.cmd run build:android:development
 ```
@@ -48,12 +79,16 @@ Follow the Expo prompts, then install the resulting APK from its build link. Get
 
 Existing users can sign in with email/password, then choose **Connect Google** in Profile using the same email. After linking, **Continue with Google** works on the sign-in screen.
 
+## Standalone APK and hosted API
+
+For testing outside your local network, host the API at a public HTTPS address and build an Android preview APK with that address in the EAS `preview` environment. Run `npm.cmd run build:android:preview` from `mobile` after setting `EXPO_PUBLIC_API_URL`. See the [Render and APK instructions](docs/instruction.md#9-move-the-api-to-render-for-review-from-anywhere) for the exact setup. The APK works without Expo Go or a Metro server.
+
 ## Deadline popups
 
 While the app is open, a pending task shows a popup when its deadline passes. If the app was closed, overdue tasks are shown together when it opens again. Each task deadline is shown once per account and device; changing a deadline allows a new alert. These are in-app popups, so they do not appear while the app is closed.
 
 ## Preview and verification
 
-`EXPO_PUBLIC_PREVIEW_MODE=true` uses temporary UI data without the API. Restart Expo after changing the setting. For checks, run `npx.cmd tsc --noEmit` and `npm.cmd run lint` in `mobile`, then `npm.cmd run build` and `npm.cmd test` in `backend`.
+`EXPO_PUBLIC_PREVIEW_MODE=true` uses temporary UI data without the API. Review APKs use `EXPO_PUBLIC_PREVIEW_MODE=false` and real accounts and tasks. Restart Expo after changing the setting. For checks, run `npx.cmd tsc --noEmit` and `npm.cmd run lint` in `mobile`, then `npm.cmd run build` and `npm.cmd test` in `backend`.
 
-See `docs/architecture.md` and `docs/api.md`.
+See the [architecture](docs/architecture.md), [API reference](docs/api.md), and [setup instructions](docs/instruction.md).
